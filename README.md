@@ -18,9 +18,7 @@
 
 ## With AWS CLI
 
-### M5.large (4vCPU)
-
-#### Transferring 1 10G file
+### M5.large (4vCPU) - Transferring 1 x 10G file
 
 **Default S3 configuration**
 
@@ -43,7 +41,7 @@ sys     1m4.615s
 
 Data transfer = 10GB = 80Gb
 Time lapse = 72 seconds
-Real transfer speed = 80/72 = 1.11 Gbps
+Real transfer speed = 80/72 = **1.11 Gbps**
 
 **with diff configurations**
 
@@ -66,12 +64,10 @@ sys     1m2.662s
 
 Data transfer = 10GB = 80Gb
 Time lapse = 142 seconds
-Real transfer speed = 80/142 = 0.56 Gbps
+Real transfer speed = 80/142 = **0.56 Gbps**
 
 
-### M5.24xlarge (96vCPU)
-
-#### Transferring 1 10G file
+### M5.24xlarge (96vCPU) - Transferring 1 x 10G file
 
 **Default S3 configuration**
 
@@ -93,7 +89,7 @@ sys     0m32.133s
 
 Data transfer = 10GB = 80Gb
 Time lapse = 58 seconds
-Real transfer speed = 80/58 = 1.38 Gbps
+Real transfer speed = 80/58 = **1.38 Gbps**
 
 **with diff configurations**
 
@@ -117,7 +113,7 @@ sys     1m29.630s
 
 Data transfer = 10GB = 80Gb
 Time lapse = 85 seconds
-Real transfer speed = 80/85 = 0.94 Gbps
+Real transfer speed = 80/85 = **0.94 Gbps**
 
 ```
 aws configure set default.s3.max_concurrent_requests 50
@@ -140,7 +136,7 @@ sys     0m45.625s
 
 Data transfer = 10GB = 80Gb
 Time lapse = 50 seconds
-Real transfer speed = 80/50 = 1.6 Gbps
+Real transfer speed = 80/50 = **1.6 Gbps**
 
 ```
 aws configure set default.s3.max_concurrent_requests 100
@@ -163,7 +159,7 @@ sys     1m31.479s
 
 Data transfer = 10GB = 80Gb
 Time lapse = 89 seconds
-Real transfer speed = 80/89 = 0.89 Gbps
+Real transfer speed = 80/89 = **0.89 Gbps**
 
 ```
 aws configure set default.s3.max_concurrent_requests 50
@@ -185,9 +181,9 @@ sys     0m47.690s
 
 Data transfer = 10GB = 80Gb
 Time lapse = 53 seconds
-Real transfer speed = 80/53 = 1.5 Gbps
+Real transfer speed = 80/53 = **1.5 Gbps**
 
-#### Transferring 20 10G file concurrently
+### M5.24xlarge (96vCPU) - Transferring 20 x 10G files concurrently
 
 ```
 aws configure set default.s3.max_concurrent_requests 50
@@ -204,7 +200,7 @@ sys     23m17.732s
 
 Data transfer = 20 * 10GB = 1600Gb
 Time lapse = 336s
-Real transfer speed = 1600/336 = 4.7Gbps
+Real transfer speed = 1600/336 = **4.7Gbps**
 
 ```
 aws configure set default.s3.max_concurrent_requests 1000
@@ -221,7 +217,7 @@ sys     12m59.069s
 
 Data transfer = 20 * 10GB = 1600Gb
 Time lapse = 294
-Real transfer speed = 1600/294 = 5.4Gbps 
+Real transfer speed = 1600/294 = **5.4Gbps** 
 
 ```
 aws configure set default.s3.max_concurrent_requests 1000
@@ -233,11 +229,7 @@ npm run transfer:large-folder
 
 Data transfer = 20 * 10GB = 1600Gb
 Time lapse = 621
-Real transfer speed = 1600/621 = 2.57Gbps
-
-Data transfer = 20 * 10GB = 1600Gb
-Time lapse = 621
-Real transfer speed = 1600/621 = 2.57Gbps
+Real transfer speed = 1600/621 = **2.57Gbps**
 
 ```
 aws configure set default.s3.max_concurrent_requests 100
@@ -254,9 +246,9 @@ sys     11m22.615s
 
 Data transfer = 20 * 10GB = 1600Gb
 Time lapse = 858
-Real transfer speed = 1600/858 = 1.86Gbps
+Real transfer speed = 1600/858 = **1.86Gbps**
 
-## With S5cmd
+## M5.24xlarge (96vCPU) - With S5cmd
 
 **1 x 10 GB file**
 
@@ -268,7 +260,7 @@ sys     0m0.019s
 
 Data transfer = 1 * 10GB = 80 Gb
 Time lapse = 37
-Real transfer speed = 80/37 = 2.16 Gbps
+Real transfer speed = 80/37 = **2.16 Gbps**
 
 **20 x 10GB files**
 
@@ -280,7 +272,7 @@ sys     0m0.056s
 
 Data transfer = 20 * 10GB = 1600Gb
 Time lapse = 81
-Real transfer speed = 1600/81 = 19.75 Gbps
+Real transfer speed = 1600/81 = **19.75 Gbps**
 
 
 ## FAQ
@@ -312,3 +304,4 @@ https://aws.amazon.com/premiumsupport/knowledge-center/s3-transfer-data-bucket-i
 **References**
 1. https://joshua-robinson.medium.com/s5cmd-for-high-performance-object-storage-7071352cc09d
 2. https://aws.amazon.com/blogs/opensource/parallelizing-s3-workloads-s5cmd/
+3. https://github.com/dvassallo/s3-benchmark
