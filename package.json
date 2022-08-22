@@ -1,0 +1,23 @@
+{
+  "name": "transfer-large-files-to-s3",
+  "version": "1.0.0",
+  "description": "## Objective 1. To understand the use of different parameters in order to maximize transfer speed",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate:large-file": ". ./create-large-file-size.sh",
+    "transfer:large-file": ". ./transfer-large-file-size.sh",
+    "transfer:large-folder": ". ./transfer-folder-with-large-file-size.sh",
+    "watch:https-connections": "watch \"lsof -i tcp:443 | tail -n +2 | wc -l\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebastianlzy/transfer-large-files-to-s3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sebastianlzy/transfer-large-files-to-s3/issues"
+  },
+  "homepage": "https://github.com/sebastianlzy/transfer-large-files-to-s3#readme"
+}
