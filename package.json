@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "generate:large-file": ". ./create-large-file-size.sh",
     "transfer:large-file": ". ./transfer-large-file-size.sh",
-    "transfer:large-folder": ". ./transfer-folder-with-large-file-size.sh",
+    "transfer:large-folder": ". ./transfer-large-folder.sh",
+    "transfer:large-folder-with-s5cmd": ". ./transfer-large-folder-with-s5cmd.sh",
     "watch:https-connections": "watch \"lsof -i tcp:443 | tail -n +2 | wc -l\""
   },
   "repository": {

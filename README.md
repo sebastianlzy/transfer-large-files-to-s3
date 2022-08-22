@@ -19,14 +19,15 @@
 
 ### M5.24xlarge (96vCPU)
 
+#### Transferring 1 10G file
+
 **Default S3 configuration**
 
 ```
 aws configure set default.s3.max_concurrent_requests 10
 aws configure set default.s3.multipart_chunksize 8MB
-```
+npm run transfer:large-file
 
-```
 > transfer-large-files-to-s3@1.0.0 transfer:large-file
 > . ./transfer-large-file-size.sh
 
@@ -134,7 +135,7 @@ Data transfer = 10GB = 80Gb
 Time lapse = 53 seconds
 Real transfer speed = 80/53 = 1.5 Gbps
 
-**Transferring 20 10G file concurrently**
+#### Transferring 20 10G file concurrently
 
 ```
 aws configure set default.s3.max_concurrent_requests 50
@@ -143,27 +144,65 @@ aws configure get default.s3.multipart_chunksize
 aws configure get default.s3.max_concurrent_requests
 npm run transfer:large-folder
 
-
+real    5m36.681s
+user    32m40.648s
+sys     23m17.732s
 
 ```
 
 Data transfer = 20 * 10GB = 1600Gb
-Time lapse = 
-Real transfer speed = 1600/ = 
+Time lapse = 336s
+Real transfer speed = 1600/336 = 4.7Gbps
 
 ```
-aws configure set default.s3.max_concurrent_requests 10
+aws configure set default.s3.max_concurrent_requests 1000
 aws configure set default.s3.multipart_chunksize 100MB
 aws configure get default.s3.multipart_chunksize
 aws configure get default.s3.max_concurrent_requests
 npm run transfer:large-folder
 
+real    10m21.931s
+user    22m41.160s
+sys     12m59.069s
+
 ```
 
 Data transfer = 20 * 10GB = 1600Gb
-Time lapse =
-Real transfer speed = 1600/ =
+Time lapse = 294
+Real transfer speed = 1600/294 = 5.4Gbps 
 
+```
+aws configure set default.s3.max_concurrent_requests 1000
+aws configure set default.s3.multipart_chunksize 100MB
+aws configure get default.s3.multipart_chunksize
+aws configure get default.s3.max_concurrent_requests
+npm run transfer:large-folder
+```
+
+Data transfer = 20 * 10GB = 1600Gb
+Time lapse = 621
+Real transfer speed = 1600/621 = 2.57Gbps
+
+Data transfer = 20 * 10GB = 1600Gb
+Time lapse = 621
+Real transfer speed = 1600/621 = 2.57Gbps
+
+```
+aws configure set default.s3.max_concurrent_requests 100
+aws configure set default.s3.multipart_chunksize 1000MB
+aws configure get default.s3.multipart_chunksize
+aws configure get default.s3.max_concurrent_requests
+npm run transfer:large-folder
+
+real    14m18.611s
+user    20m46.837s
+sys     11m22.615s
+
+```
+
+Data transfer = 20 * 10GB = 1600Gb
+Time lapse = 858
+Real transfer speed = 1600/858 = 1.86Gbps
 
 ## With S5cmd
 
@@ -178,3 +217,23 @@ Real is wall clock time - time from start to finish of the call. This is all ela
 User is the amount of CPU time spent in user-mode code (outside the kernel) within the process. This is only actual CPU time used in executing the process. Other processes and time the process spends blocked do not count towards this figure.
 
 Sys is the amount of CPU time spent in the kernel within the process. This means executing CPU time spent in system calls within the kernel, as opposed to library code, which is still running in user-space. Like 'user', this is only CPU time used by the process. See below for a brief description of kernel mode (also known as 'supervisor' mode) and the system call mechanism.
+
+
+### What is the maximum transfer speed between EC2 and S3?
+
+100 Gbps bandwidth
+
+https://aws.amazon.com/premiumsupport/knowledge-center/s3-maximum-transfer-speed-ec2/#:%7E:text=Traffic%20between%20Amazon%20EC2%20and,IPs%20in%20the%20same%20Region
+
+### How can I improve the transfer speeds for copying data between my S3 bucket and EC2 instance?
+
+https://aws.amazon.com/premiumsupport/knowledge-center/s3-transfer-data-bucket-instance/
+
+### Why is s5cmd faster?
+
+1. Written in a high-performance, concurrent language, Go, instead of Python. This means the application can take better advantage of multiple threads and is faster to run because it is compiled and not interpreted.
+2. Better utilization of multiple tcp connections to transfer more data to and from the object store, resulting in higher throughput transfers.
+
+**References**
+1. https://joshua-robinson.medium.com/s5cmd-for-high-performance-object-storage-7071352cc09d
+2. https://aws.amazon.com/blogs/opensource/parallelizing-s3-workloads-s5cmd/
