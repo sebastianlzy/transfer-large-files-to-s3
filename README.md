@@ -7,6 +7,15 @@
 1. We are transferring file from EC2 to S3 via S3 VPC gateway endpoint 
 2. Bandwidth limit is set at 1000Gbps
 
+## Summary
+
+|         | 1 x 10GB  | 20 x 20 GB | 
+|---------|-----------|------------|
+| AWS CLI | 1.6 Gbps  | 5.4 Gbps   |
+| S5 CMD  | 2.16 Gbps | 19.75 Gbps |
+
+
+
 ## With AWS CLI
 
 ### M5.large (4vCPU)
