@@ -252,8 +252,14 @@ Real transfer speed = 1600/858 = 1.86Gbps
 **1 x 10 GB file**
 
 ```
-
+real    0m37.996s
+user    0m0.050s
+sys     0m0.019s
 ```
+
+Data transfer = 1 * 10GB = 80 Gb
+Time lapse = 37
+Real transfer speed = 80/37 = 2.16 Gbps
 
 **20 x 10GB files**
 
