@@ -206,6 +206,15 @@ Real transfer speed = 1600/858 = 1.86Gbps
 
 ## With S5cmd
 
+```
+real    1m21.955s
+user    0m0.032s
+sys     0m0.056s
+```
+
+Data transfer = 20 * 10GB = 1600Gb
+Time lapse = 81
+Real transfer speed = 1600/81 = 19.75 Gbps
 
 
 ## FAQ
