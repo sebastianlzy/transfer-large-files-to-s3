@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "generate:large-file": ". ./create-large-file-size.sh",
+    "create:large-file": ". ./create-large-file-size.sh",
     "transfer:large-file": ". ./transfer-large-file-size.sh",
+    "transfer:large-file-with-s5cmd": ". ./transfer-large-file-size-with-s5cmd.sh",
     "transfer:large-folder": ". ./transfer-large-folder.sh",
     "transfer:large-folder-with-s5cmd": ". ./transfer-large-folder-with-s5cmd.sh",
-    "watch:https-connections": "watch \"lsof -i tcp:443 | tail -n +2 | wc -l\""
+    "watch:https-connections": "watch \"lsof -i tcp:443 | tail -n +2 | wc -l\"",
+    "delete:all-files-in-s3": "aws s3 rm --recursive s3://transfer-large-file-size"
   },
   "repository": {
     "type": "git",

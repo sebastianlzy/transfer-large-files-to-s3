@@ -11,10 +11,53 @@
 
 ### M5.large (4vCPU)
 
-#### Single S3 file transfer
+#### Transferring 1 10G file
 
+**Default S3 configuration**
 
+```
+aws configure set default.s3.max_concurrent_requests 10
+aws configure set default.s3.multipart_chunksize 8MB
+npm run transfer:large-file
 
+> transfer-large-files-to-s3@1.0.0 transfer:large-file
+> . ./transfer-large-file-size.sh
+
+time aws s3 cp ./bin/10G_image_file_size_1661141928.jpg s3://transfer-large-file-size
+upload: bin/10G_image_file_size_1661141928.jpg to s3://transfer-large-file-size/10G_image_file_size_1661141928.jpg
+
+real    1m12.621s
+user    1m15.408s
+sys     1m4.615s
+
+```
+
+Data transfer = 10GB = 80Gb
+Time lapse = 72 seconds
+Real transfer speed = 80/72 = 1.11 Gbps
+
+**with diff configurations**
+
+```
+aws configure set default.s3.max_concurrent_requests 50
+aws configure set default.s3.multipart_chunksize 10MB
+npm run transfer:large-file
+
+> transfer-large-files-to-s3@1.0.0 transfer:large-file
+> . ./transfer-large-file-size.sh
+
+time aws s3 cp ./bin/10G_image_file_size_1661141928.jpg s3://transfer-large-file-size
+upload: bin/10G_image_file_size_1661141928.jpg to s3://transfer-large-file-size/10G_image_file_size_1661141928.jpg
+
+real    2m22.707s
+user    1m17.685s
+sys     1m2.662s
+
+```
+
+Data transfer = 10GB = 80Gb
+Time lapse = 142 seconds
+Real transfer speed = 80/142 = 0.56 Gbps
 
 
 ### M5.24xlarge (96vCPU)
@@ -205,6 +248,14 @@ Time lapse = 858
 Real transfer speed = 1600/858 = 1.86Gbps
 
 ## With S5cmd
+
+**1 x 10 GB file**
+
+```
+
+```
+
+**20 x 10GB files**
 
 ```
 real    1m21.955s
