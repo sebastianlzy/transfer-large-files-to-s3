@@ -5,13 +5,13 @@
 
 ## Constrains
 1. We are transferring file from EC2 to S3 via S3 VPC gateway endpoint 
-2. Bandwidth limit is set at 1000Gbps
+2. Bandwidth limit is set at 100Gbps
 
 ## Summary
 
 |         | 1 x 10GB  | 20 x 20 GB | 
 |---------|-----------|------------|
-| AWS CLI | 1.6 Gbps  | 5.4 Gbps   |
+| AWS CLI | 1.6 Gbps  | 6.3 Gbps   |
 | S5 CMD  | 2.16 Gbps | 19.75 Gbps |
 
 
@@ -186,50 +186,37 @@ Real transfer speed = 80/53 = **1.5 Gbps**
 ### M5.24xlarge (96vCPU) - Transferring 20 x 10G files concurrently
 
 ```
-aws configure set default.s3.max_concurrent_requests 50
-aws configure set default.s3.multipart_chunksize 100MB
-aws configure get default.s3.multipart_chunksize
-aws configure get default.s3.max_concurrent_requests
-npm run transfer:large-folder
-
-real    5m36.681s
-user    32m40.648s
-sys     23m17.732s
-
-```
-
-Data transfer = 20 * 10GB = 1600Gb
-Time lapse = 336s
-Real transfer speed = 1600/336 = **4.7Gbps**
-
-```
 aws configure set default.s3.max_concurrent_requests 1000
 aws configure set default.s3.multipart_chunksize 100MB
 aws configure get default.s3.multipart_chunksize
 aws configure get default.s3.max_concurrent_requests
 npm run transfer:large-folder
 
-real    10m21.931s
-user    22m41.160s
-sys     12m59.069s
+real    5m38.101s
+user    34m45.837s
+sys     24m12.420s
 
 ```
 
 Data transfer = 20 * 10GB = 1600Gb
-Time lapse = 294
-Real transfer speed = 1600/294 = **5.4Gbps** 
+Time lapse = 338
+Real transfer speed = 1600/338 = **4.7Gbps**
 
 ```
 aws configure set default.s3.max_concurrent_requests 1000
-aws configure set default.s3.multipart_chunksize 100MB
+aws configure set default.s3.multipart_chunksize 200MB
 aws configure get default.s3.multipart_chunksize
 aws configure get default.s3.max_concurrent_requests
 npm run transfer:large-folder
+
+real    4m53.773s
+user    31m27.878s
+sys     19m41.614s
 ```
 
 Data transfer = 20 * 10GB = 1600Gb
-Time lapse = 621
-Real transfer speed = 1600/621 = **2.57Gbps**
+Time lapse = 293
+Real transfer speed = 1600/293 =  **5.4 Gbps**
 
 ```
 aws configure set default.s3.max_concurrent_requests 100
@@ -238,15 +225,32 @@ aws configure get default.s3.multipart_chunksize
 aws configure get default.s3.max_concurrent_requests
 npm run transfer:large-folder
 
-real    14m18.611s
-user    20m46.837s
-sys     11m22.615s
+real    5m20.111s
+user    20m46.356s
+sys     11m15.505s
 
 ```
 
 Data transfer = 20 * 10GB = 1600Gb
-Time lapse = 858
-Real transfer speed = 1600/858 = **1.86Gbps**
+Time lapse = 320
+Real transfer speed = 1600/320 = **5Gbps**
+
+```
+aws configure set default.s3.max_concurrent_requests 1000
+aws configure set default.s3.multipart_chunksize 2000MB
+aws configure get default.s3.multipart_chunksize
+aws configure get default.s3.max_concurrent_requests
+npm run transfer:large-folder
+
+real    4m14.343s
+user    19m2.679s
+sys     12m25.041s
+
+```
+
+Data transfer = 20 * 10GB = 1600Gb
+Time lapse = 254
+Real transfer speed = 1600/254 = **6.3Gbps**
 
 ## M5.24xlarge (96vCPU) - With S5cmd
 
