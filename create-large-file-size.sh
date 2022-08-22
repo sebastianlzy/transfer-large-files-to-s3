@@ -5,3 +5,6 @@ RANDOM_NUMBER="$(date +%s)"
 
 echo "creates ./bin/${FILE_SIZE}_image_file_size_${RANDOM_NUMBER}.jpg"
 fallocate -l ${FILE_SIZE} "./bin/${FILE_SIZE}_image_file_size_${RANDOM_NUMBER}.jpg"
+
+echo "no of files in bin folder"
+ls bin | wc -l
